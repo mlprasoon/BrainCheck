@@ -3,6 +3,7 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 import os
+import requests
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -10,7 +11,13 @@ app.secret_key = 'your-secret-key-here'  # Required for session management
 
 # Model configuration
 
-MODEL_PATH = "https://github.com/mlprasoon/BrainCheck/releases/download/model/best_model.keras"
+MODEL_URL = "https://drive.google.com/file/d/1746VcxeBI5E54YNjg0PtSK8Xt75YNkWN/view?usp=drive_link"
+MODEL_PATH = "best_model.keras"
+
+if not os.path.exists(MODEL_PATH):
+    response = requests.get(MODEL_URL)
+    with open(MODEL_PATH, "wb") as f:
+        f.write(response.content)
 
 CLASSES = ['Glioma', 'Meningioma', 'No Tumor', 'Pituitary']
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'bmp'}
