@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="result-container neumorphic">
+    <div class="result-header">
+        <h2>Analysis Results</h2>
+        <p>Brain tumor classification results</p>
+    </div>
+
+    <div class="loading-container" id="loading-container">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Analyzing MRI scan...</p>
+    </div>
+
+    <div class="result-grid" id="result-content" style="display: none;">
+        <div class="image-section neumorphic">
+            <h3>Uploaded MRI Scan</h3>
+            <div class="image-container">
+                <img src="{{ results.image_path }}" alt="Uploaded MRI scan">
+            </div>
+            <div class="image-details">
+                <div class="detail-item">
+                    <div class="detail-content">
+                        <h4>Image Dimensions</h4>
+                        <p>Original size: {{ results.original_width }} × {{ results.original_height }} pixels</p>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-content">
+                        <h4>Aspect Ratio</h4>
+                        <p>{{ "%.2f"|format(results.aspect_ratio) }}:1 ({{ results.aspect_ratio_status }})</p>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-content">
+                        <h4>Processing</h4>
+                        <p>Resized to 224×224 pixels for model input</p>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-content">
+                        <h4>File Format</h4>
+                        <p>{{ results.file_format }}</p>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-content">
+                        <h4>File Size</h4>
+                        <p>{{ results.file_size }}</p>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-content">
+                        <h4>Color Mode</h4>
+                        <p>{{ results.color_mode }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="analysis-section neumorphic">
+            <h3>Classification Results</h3>
+            <div class="prediction-summary">
+                <h4>Predicted Class: <span class="predicted-class">{{ results.predicted_class }}</span></h4>
+                <p class="confidence">Confidence: {{ "%.2f"|format(results.confidence * 100) }}%</p>
+            </div>
+            <div class="predictions-container">
+                {% for class_name, probability in results.predictions.items() %}
+                <div class="prediction-item">
+                    <div class="prediction-header">
+                        <span class="class-name">{{ class_name }}</span>
+                        <span class="probability">{{ "%.2f"|format(probability * 100) }}%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: {{ probability * 100 }}%"></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="analysis-details">
+                <h4>Analysis Details</h4>
+                <div class="tumor-info">
+                    <div class="info-item">
+                        <h5>Glioma</h5>
+                        <p>A type of tumor that originates from glial cells, ranging from low-grade to high-grade malignancy. These are the most common primary brain tumors, and their MRI appearance varies in contrast.</p>
+                    </div>
+                    <div class="info-item">
+                        <h5>Meningioma</h5>
+                        <p>Usually benign tumors that develop in the meninges. They appear as well-defined, round masses with consistent contrast enhancement on MRI scans.</p>
+                    </div>
+                    <div class="info-item">
+                        <h5>Pituitary Tumor</h5>
+                        <p>Benign tumors that arise in the pituitary gland, typically near the sella turcica. These tumors show distinct enhancement on MRI.</p>
+                    </div>
+                    <div class="info-item">
+                        <h5>No Tumor</h5>
+                        <p>Normal brain structure with no irregular masses or distortions detected, or minor non-tumor conditions.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="disclaimer-box neumorphic">
+        <div class="disclaimer-content">
+            <h4>Important</h4>
+            <p> Don't rely on these results for self-diagnosis. The model is meant to assist, not to take the place of a professional medical diagnosis.</p>
+        </div>
+    </div>
+
+    <div class="action-buttons">
+        <a href="{{ url_for('upload') }}" class="btn neumorphic">
+            <span class="btn-text">Analyze Another Image</span>
+        </a>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Simulate loading time (remove this in production)
+    setTimeout(function() {
+        document.getElementById('loading-container').style.display = 'none';
+        document.getElementById('result-content').style.display = 'grid';
+    }, 2000); // Show loading for 2 seconds
+});
+</script>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="home-block">
+
+    <div class="home-block-content">
+        <h2>Brain Tumor Detection</h2>
+        <p>Welcome to Brain Tumor Detection project. Our advanced CNN model achieves 98.32% accuracy in identifying and classifying brain tumors into four categories: glioma, meningioma, pituitary, and no-tumor cases.</p>
+        <a href="{{ url_for('upload') }}" class="btn">Start Your Scan</a>
+    </div>
+</div>
+
+
+<div class="features-block">
+    <h2>Key Features of This Project</h2>
+<div class="features-list">
+    <div class="feature-item">
+        <h3>Accuracy</h3>
+        <p>Benefit from a proven 98.32% accuracy rate, ensuring reliable results that aid healthcare professionals in making informed decisions about your health.</p>
+    </div>
+    <div class="feature-item">
+        <h3>Fast and Convenient</h3>
+        <p>Simply upload your MRI scan and receive your results in seconds, streamlining your medical process and saving you precious time.</p>
+    </div>
+    <div class="feature-item">
+        <h3>In-Depth Analysis</h3>
+        <p>Get a thorough breakdown of your scan, including information on any potential tumors, allowing you to better understand your health condition.</p>
+    </div>
+    <div class="feature-item">
+        <h3>Support</h3>
+        <p>Our platform complements medical professionals by providing them with valuable insights, enhancing their diagnostic capabilities.</p>
+    </div>
+    <div class="feature-item">
+        <h3>Instant Feedback</h3>
+        <p>No need to wait—your analysis is available immediately after uploading your scan.</p>
+    </div>
+    <div class="feature-item">
+        <h3>User-Friendly Interface</h3>
+        <p>Designed with simplicity in mind, our platform makes it easy for both patients and healthcare providers to upload scans and interpret results.</p>
+    </div>
+    <div class="feature-item">
+        <h3>Cutting-Edge Architecture</h3>
+        <p>Leveraging a VGG-inspired CNN architecture with optimized 3x3 kernels and strategic dropout layers, our system offers superior performance in medical image analysis.</p>
+    </div>
+    <div class="feature-item">
+        <h3>Ongoing Enhancement</h3>
+        <p>We are continuously improving our model with advanced training techniques and expanded datasets to boost accuracy even further. Stay updated for future improvements!</p>
+    </div>
+</div>
+
+</div>
+{% endblock %}
