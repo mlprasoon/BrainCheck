@@ -10,7 +10,7 @@ app.secret_key = 'your-secret-key-here'  # Required for session management
 
 # Model configuration
 
-MODEL_PATH = "C:/Users/TA92/Desktop/8sem/BrainCheck/models/best_model.keras"
+MODEL_PATH = "https://github.com/mlprasoon/BrainCheck/releases/download/model/best_model.keras"
 
 CLASSES = ['Glioma', 'Meningioma', 'No Tumor', 'Pituitary']
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'bmp'}
